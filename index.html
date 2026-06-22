@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sadie Rose – New Product Request</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #faf9f7;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #121212;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    header span {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #121212;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f01d4f;
+      margin: 32px 0 16px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    label .req {
+      color: #f01d4f;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #1a1a1a;
+      background: #fff;
+      transition: border-color 0.15s;
+      appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #f01d4f;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: #f01d4f;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .file-upload-area {
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .file-upload-area:hover {
+      border-color: #f01d4f;
+    }
+
+    .file-upload-area input {
+      display: none;
+    }
+
+    .file-upload-area p {
+      font-size: 14px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    .file-upload-area strong {
+      color: #f01d4f;
+      font-size: 14px;
+    }
+
+    #file-list {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 8px 0 4px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #f01d4f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 32px;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+    }
+
+    button[type="submit"]:hover {
+      background: #d01640;
+    }
+
+    button[type="submit"]:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    #success {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    #success h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #121212;
+    }
+
+    #success p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    #success .check {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    #error-msg {
+      display: none;
+      background: #fff0f3;
+      border: 1px solid #f01d4f;
+      color: #c0143c;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://sadierose.com/swp/wp-content/themes/sadierose/library/images/logo.png" alt="Sadie Rose" onerror="this.style.display='none'" />
+  <span>Sadie Rose Baking Co.</span>
+</header>
+
+<div class="container">
+  <h1>New Product Request</h1>
+  <p class="subtitle">Fill out all required fields. Our team will review and follow up.</p>
+
+  <form id="product-form">
+
+    <!-- CUSTOMER INFO -->
+    <div class="section-label">Customer Info</div>
+
+    <div class="field">
+      <label>Customer Name <span class="req">*</span></label>
+      <input type="text" name="customerName" required placeholder="e.g. Sub Zero Sandos" />
+    </div>
+
+    <div class="field">
+      <label>Number of Locations <span class="req">*</span></label>
+      <input type="number" name="numLocations" required placeholder="e.g. 5" min="1" />
+    </div>
+
+    <div class="field">
+      <label>Estimated Annual Revenue <span class="req">*</span></label>
+      <input type="text" name="annualRevenue" required placeholder="e.g. $500,000" />
+    </div>
+
+    <!-- PRODUCT DETAILS -->
+    <div class="section-label">Product Details</div>
+
+    <div class="field">
+      <label>Product Name / Type <span class="req">*</span></label>
+      <input type="text" name="productName" required placeholder="e.g. Torpedo Roll" />
+    </div>
+
+    <div class="field">
+      <label>Fresh or Frozen <span class="req">*</span></label>
+      <div class="radio-group">
+        <label><input type="radio" name="freshFrozen" value="Fresh" required /> Fresh</label>
+        <label><input type="radio" name="freshFrozen" value="Frozen" /> Frozen</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Units <span class="req">*</span></label>
+      <input type="text" name="units" required placeholder="e.g. Pieces, 6-Packs, Loafs" />
+    </div>
+
+    <div class="field">
+      <label>Daily Volume in Units <span class="req">*</span></label>
+      <input type="number" name="dailyVolume" required placeholder="e.g. 500" min="0" />
+    </div>
+
+    <div class="field">
+      <label>Weekly Volume in Units <span class="req">*</span></label>
+      <input type="number" name="weeklyVolume" required placeholder="e.g. 3000" min="0" />
+    </div>
+
+    <div class="field">
+      <label>Dimensions (L x W x H) <span class="req">*</span></label>
+      <input type="text" name="dimensions" required placeholder='e.g. 11 x 4 x 3"' />
+    </div>
+
+    <div class="field">
+      <label>Weight <span class="req">*</span></label>
+      <input type="text" name="weight" required placeholder="e.g. 10 oz" />
+    </div>
+
+    <!-- SPECS -->
+    <div class="section-label">Specs</div>
+
+    <div class="field">
+      <label>Dough Type <span class="req">*</span></label>
+      <div class="radio-group">
+        <label><input type="radio" name="doughType" value="Amish" required /> Amish</label>
+        <label><input type="radio" name="doughType" value="Focaccia" /> Focaccia</label>
+        <label><input type="radio" name="doughType" value="French" /> French</label>
+        <label><input type="radio" name="doughType" value="Sourdough" /> Sourdough</label>
+        <label><input type="radio" name="doughType" value="Custom" /> Custom</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Bottom Type <span class="req">*</span></label>
+      <div class="radio-group">
+        <label><input type="radio" name="bottomType" value="Rounded Bottom" required /> Rounded Bottom</label>
+        <label><input type="radio" name="bottomType" value="Flat Bottom" /> Flat Bottom</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Scoring <span class="req">*</span></label>
+      <div class="radio-group">
+        <label><input type="radio" name="scoring" value="Yes" required /> Yes</label>
+        <label><input type="radio" name="scoring" value="No" /> No</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Topping</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="topping" value="Seeds" /> Seeds</label>
+        <label><input type="checkbox" name="topping" value="Egg Wash" /> Egg Wash</label>
+        <label><input type="checkbox" name="topping" value="None" /> None</label>
+        <label><input type="checkbox" name="topping" value="Other" /> Other</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Ingredients</label>
+      <textarea name="ingredients" placeholder="List all ingredients..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Sweet?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="sweet" value="Yes" /> Yes</label>
+        <label><input type="radio" name="sweet" value="No" /> No</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Vegan?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="vegan" value="Yes" /> Yes</label>
+        <label><input type="radio" name="vegan" value="No" /> No</label>
+      </div>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="section-label">Photos</div>
+
+    <div class="field">
+      <label>Product Photos <span class="req">*</span></label>
+      <div class="file-upload-area" onclick="document.getElementById('photos').click()">
+        <input type="file" id="photos" name="photos" multiple accept="image/*" onchange="showFiles(this)" />
+        <strong>Click to upload photos</strong>
+        <p>JPG, PNG, HEIC — up to 10 files</p>
+      </div>
+      <div id="file-list"></div>
+    </div>
+
+    <hr class="divider" />
+
+    <button type="submit" id="submit-btn">Submit Request</button>
+    <div id="error-msg">Something went wrong. Please try again or email your request directly.</div>
+
+  </form>
+
+  <div id="success">
+    <div class="check">✅</div>
+    <h2>Request Submitted!</h2>
+    <p>We received your new product request. Our team will be in touch soon.</p>
+  </div>
+</div>
+
+<script>
+  function showFiles(input) {
+    const list = document.getElementById('file-list');
+    const files = Array.from(input.files);
+    list.innerHTML = files.map(f => `📎 ${f.name}`).join('<br>');
+  }
+
+  document.getElementById('product-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submit-btn');
+    const errMsg = document.getElementById('error-msg');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    errMsg.style.display = 'none';
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    // Collect checkbox values
+    const toppings = Array.from(form.querySelectorAll('input[name="topping"]:checked')).map(el => el.value);
+
+    // Build payload
+    const payload = {
+      customerName: data.get('customerName'),
+      numLocations: data.get('numLocations'),
+      annualRevenue: data.get('annualRevenue'),
+      productName: data.get('productName'),
+      freshFrozen: data.get('freshFrozen'),
+      units: data.get('units'),
+      dailyVolume: data.get('dailyVolume'),
+      weeklyVolume: data.get('weeklyVolume'),
+      dimensions: data.get('dimensions'),
+      weight: data.get('weight'),
+      doughType: data.get('doughType'),
+      bottomType: data.get('bottomType'),
+      scoring: data.get('scoring'),
+      topping: toppings.join(', ') || 'None selected',
+      ingredients: data.get('ingredients'),
+      sweet: data.get('sweet'),
+      vegan: data.get('vegan'),
+    };
+
+    // Send to Google Sheets via Apps Script Web App
+    const SHEET_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // Show success
+      document.getElementById('product-form').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+    } catch (err) {
+      errMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Submit Request';
+    }
+  });
+</script>
+
+</body>
+</html>
